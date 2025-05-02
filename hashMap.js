@@ -69,6 +69,9 @@ class HashMap{
        
     }
     get(key){
+        this.buckets.forEach(bucket=>{
+            console.log(bucket.toString())
+        })
         let index= this.hash(key)
         if(this.buckets[index]){
             let nodeIndex= this.buckets[index].find(key)
@@ -168,5 +171,49 @@ hashmap.set('jacket', 'blue')
 hashmap.set('kite', 'pink')
 hashmap.set('lion', 'golden')
 
+console.log(hashmap.get('lion'))
 
-console.log(hashmap.keys())
+class HashSet extends HashMap{
+    constructor(){
+        super()
+        this.loadFactor= 0.75
+        this.capacity= 16
+        this.buckets=[]
+    }
+    set(key){
+        let index= this.hash(key)
+        this.checkCapacity()
+        if(!this.buckets[index] ){
+            let linkedList = new LinkedList()
+            linkedList.append(key)
+            this.buckets[index] = linkedList
+        }else{
+            this.buckets[index].prepend(key)
+        }
+       
+    }
+    values(){
+        return super.keys()
+    }
+    entries(){
+        return super.keys()
+    }
+
+}
+
+let hashSet = new HashSet()
+
+hashSet.set('apple') 
+hashSet.set('banana')
+hashSet.set('carrot')
+hashSet.set('dog')
+hashSet.set('elephant')
+hashSet.set('frog')
+hashSet.set('grape')
+hashSet.set('hat')
+hashSet.set('ice cream')
+hashSet.set('jacket')
+hashSet.set('kite')
+hashSet.set('lion')
+
+console.log(hashSet.keys())

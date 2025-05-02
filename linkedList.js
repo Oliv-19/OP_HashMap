@@ -53,10 +53,10 @@ export default class LinkedList {
         }
         return null
     }
-    toString(){
+    toString(item= 'value'){
         let finalString= ''
         for (let i = 0; i < this.list.length; i++) {
-            let string =  `( ${this.list[i].value} ) -> `
+            let string =  `( ${this.list[i][item]} ) -> `
             finalString = finalString.concat(string)
         }
         finalString = finalString.concat('null')
